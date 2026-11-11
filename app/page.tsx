@@ -101,7 +101,7 @@ export default function Home() {
           act={1}
           question="Como está a saúde financeira?"
           title={`Visão Geral — Semestre ${ADEGA.periodoCurto}`}
-          subtitle="8 indicadores que resumem a saúde financeira da Diretriz Adega"
+          subtitle={`8 indicadores que resumem a saúde financeira da ${ADEGA.nome}`}
         >
           <KpiRow />
           {gapMargem > 0 ? (

@@ -1,6 +1,6 @@
-# Diretriz Adega & Empório — Dashboard de Indicadores de Gestão
+# Turini Adega & Empórios — Dashboard de Indicadores de Gestão
 
-**Mapeamento e Controle de Indicadores de Gestão — Diretriz Adega** · Projeto de Extensão Universitário
+**Mapeamento e Controle de Indicadores de Gestão — Turini Adega & Empórios** · Projeto de Extensão Universitário
 
 Painel que substitui a planilha manual da adega por indicadores de gestão organizados em uma
 narrativa de **5 atos** (storytelling com dados):

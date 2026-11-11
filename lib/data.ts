@@ -12,7 +12,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const ADEGA = {
-  nome: "Diretriz Adega & Empório",
+  nome: "Turini Adega & Empórios",
   subtitulo: "Mapeamento e Controle de Indicadores de Gestão",
   periodo: "Janeiro a Junho 2024",
   periodoCurto: "Jan–Jun 2024",
