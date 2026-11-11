@@ -9,6 +9,8 @@ import {
   RotateCcw,
   ShoppingCart,
   TrendingUp,
+  UserCheck,
+  Users,
   Wallet,
   type LucideIcon,
 } from "lucide-react";
@@ -23,6 +25,8 @@ const ICONS: Record<string, LucideIcon> = {
   Wallet,
   AlertTriangle,
   RotateCcw,
+  Users,
+  UserCheck,
 };
 
 const TONES = {
@@ -44,7 +48,7 @@ export default function KpiCard({ kpi }: { kpi: Kpi }) {
           <Icon className="h-[18px] w-[18px]" strokeWidth={1.75} aria-hidden />
         </span>
       </div>
-      <p className="mt-4 text-[28px] font-semibold leading-none tracking-tight text-ink">{kpi.value}</p>
+      <p className="mt-4 text-[26px] font-semibold leading-none tracking-tight text-ink">{kpi.value}</p>
       <p className={`mt-3 flex items-center gap-1 text-xs font-medium ${tone.className}`}>
         <ToneIcon className="h-3.5 w-3.5" aria-label={tone.label} />
         {kpi.delta}

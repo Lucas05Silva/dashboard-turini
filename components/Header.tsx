@@ -6,7 +6,8 @@ const ACTS = [
   { id: "ato-2", label: "Receita" },
   { id: "ato-3", label: "Custos" },
   { id: "ato-4", label: "Estoque" },
-  { id: "ato-5", label: "Riscos" },
+  { id: "ato-5", label: "Jornada do cliente" },
+  { id: "ato-6", label: "Retenção e riscos" },
 ];
 
 export default function Header() {

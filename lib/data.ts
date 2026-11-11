@@ -9,6 +9,10 @@
 //   • soma de salesMix.revenue        = soma de monthlyFinancials.faturamento
 //   • soma de cada mês em paymentMethods = faturamento daquele mês
 //   • soma de fixedExpenses.value     = soma de monthlyFinancials.despesasFixas
+//   • soma de newVsReturning.novos    = customerJourney "1ª compra"
+//   • soma de purchaseFrequency.count = customerJourney "1ª compra"
+//   • purchaseFrequency "1 compra"    = 1ª compra − 2ª compra do funil
+//   • soma de customerProfiles.percentReceita = 100
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const ADEGA = {
@@ -25,6 +29,14 @@ export const metas = {
   margemBruta: 50, // %
   giroEstoque: 6, // vezes no período
   fiadoDiasMax: 60, // fiados acima disso devem ser zerados
+  diasInativo: 60, // cliente sem compra há mais que isso = inativo
+  // Premissa da estimativa de reativação: quantas compras (ao ticket médio)
+  // um cliente de compra única reativado faz no semestre.
+  comprasPorClienteReativado: 3,
+  // Risco de churn ALTO quando: inativo há X+ dias, OU parado há N× o próprio intervalo médio
+  churnDiasAlto: 75,
+  churnFatorAlto: 4,
+  margemMinimaProduto: 37, // % — produtos abaixo disso são destacados
 } as const;
 
 export const periodoAnterior = {
@@ -62,6 +74,14 @@ export const paymentMethods = [
   { month: "Abr", pix: 11200, credito: 6800, debito: 4100, dinheiro: 1700, fiado: 410 },
   { month: "Mai", pix: 11800, credito: 7100, debito: 4600, dinheiro: 1500, fiado: 320 },
   { month: "Jun", pix: 13330, credito: 7400, debito: 4800, dinheiro: 1400, fiado: 280 },
+];
+
+// Perfil de clientes ativos por tipo (percentReceita deve somar 100)
+export const customerProfiles = [
+  { type: "Pessoa Física", count: 112, ticketMedio: 68, percentReceita: 48 },
+  { type: "Restaurantes/Bares", count: 18, ticketMedio: 420, percentReceita: 32 },
+  { type: "Eventos", count: 8, ticketMedio: 650, percentReceita: 12 },
+  { type: "Empresas (cestas, brindes)", count: 10, ticketMedio: 380, percentReceita: 8 },
 ];
 
 // ── ATO 3: Estrutura de Custos ──
@@ -117,7 +137,118 @@ export const marginByProduct = [
   { name: "Vodka Absolut", margin: 42.2, category: "Destilados" },
 ];
 
-// ── ATO 5: Alertas e Pendências ──
+// ── ATO 5: Jornada do Cliente + Processos ──
+
+// Funil da jornada (semestre). A 1ª etapa é a base; as demais são subconjuntos.
+export const customerJourney = [
+  { stage: "Visitaram a loja", count: 320 },
+  { stage: "Fizeram 1ª compra", count: 210 },
+  { stage: "Voltaram (2ª compra)", count: 148 },
+  { stage: "Compraram 3+ vezes", count: 89 },
+  { stage: "Clientes fiéis (mensal)", count: 52 },
+];
+
+// Clientes distintos que compraram em cada mês: novos (1ª compra) vs recorrentes
+export const newVsReturning = [
+  { month: "Jan", novos: 42, recorrentes: 28 },
+  { month: "Fev", novos: 38, recorrentes: 35 },
+  { month: "Mar", novos: 35, recorrentes: 41 },
+  { month: "Abr", novos: 30, recorrentes: 48 },
+  { month: "Mai", novos: 33, recorrentes: 50 },
+  { month: "Jun", novos: 32, recorrentes: 56 },
+];
+
+// Quantas vezes cada cliente comprou no semestre (soma = clientes da 1ª compra)
+export const purchaseFrequency = [
+  { frequency: "1 compra", count: 62, single: true },
+  { frequency: "2–3 compras", count: 59 },
+  { frequency: "4–6 compras", count: 48 },
+  { frequency: "7–12 compras", count: 29 },
+  { frequency: "13+ (semanal)", count: 12 },
+];
+
+// Intervalo médio entre compras por perfil (dias). ideal: null = sazonal, sem meta.
+export const avgTimeBetweenPurchases: { profile: string; avgDays: number; ideal: number | null }[] = [
+  { profile: "PF casual", avgDays: 38, ideal: 30 },
+  { profile: "PF entusiasta", avgDays: 14, ideal: 14 },
+  { profile: "Restaurante/Bar", avgDays: 8, ideal: 7 },
+  { profile: "Eventos", avgDays: 90, ideal: null },
+];
+
+// Mapeamento de processos: antes (manual) × depois (automatizado).
+// implantadoEm: mês em que a automação entrou em operação (usado para comparar
+// a retenção antes/depois no Ato 6). PLACEHOLDER — ajustar para as datas reais.
+export const processComparison = [
+  {
+    process: "Registro de venda",
+    before: "Anotado em caderno ou planilha manual, sem padrão de data e valor",
+    after: "Microsoft Forms → Excel padronizado, preenchido automaticamente via Power Automate",
+    impact: "Elimina erros de digitação e inconsistências; dados prontos para análise",
+    implantadoEm: "Jan",
+  },
+  {
+    process: "Controle de estoque",
+    before: "Contagem visual, sem registro. Aba de estoque abandonada desde março",
+    after: "Cada venda baixa o estoque automaticamente; e-mail de alerta quando chega ao mínimo",
+    impact: "Visibilidade em tempo real; menos ruptura e menos capital parado",
+    implantadoEm: "Fev",
+  },
+  {
+    process: "Cobrança de fiados",
+    before: "Anotado em caderno ou aba solta; cobrança depende da memória do dono",
+    after: "Lembrete automático por e-mail/WhatsApp quando o prazo vence",
+    impact: "Menos inadimplência; cobrança profissional, sem constrangimento",
+    implantadoEm: "Fev",
+  },
+  {
+    process: "Pós-venda e retenção",
+    before: "Inexistente. Nenhum contato após a compra; o cliente some e ninguém percebe",
+    after: "Agradecimento pós-compra + sugestão de produtos + alerta de cliente inativo (>30 dias)",
+    impact: "Mais retenção e ticket médio; comprador eventual vira recorrente",
+    implantadoEm: "Mar",
+    retencao: true, // automação usada na comparação antes/depois da retenção
+  },
+  {
+    process: "Relatório de desempenho",
+    before: "Dono calcula de cabeça; totais manuais errados; nenhum indicador",
+    after: "Este dashboard, atualizado automaticamente com KPIs, gráficos e alertas",
+    impact: "Decisões baseadas em dados; visão completa do negócio",
+    implantadoEm: "Jan",
+  },
+];
+
+// ── ATO 6: Retenção + Alertas ──
+
+// % dos clientes do mês anterior que voltaram a comprar no mês
+export const retentionRate = [
+  { month: "Jan", rate: 40 },
+  { month: "Fev", rate: 47 },
+  { month: "Mar", rate: 52 },
+  { month: "Abr", rate: 55 },
+  { month: "Mai", rate: 54 },
+  { month: "Jun", rate: 58 },
+];
+
+// Coorte: % dos clientes adquiridos no mês que voltaram em m+1, m+2...
+export const cohortData: { acquired: string; values: (number | null)[] }[] = [
+  { acquired: "Jan", values: [47, 38, 31, 26, 24] },
+  { acquired: "Fev", values: [50, 42, 35, 29, null] },
+  { acquired: "Mar", values: [54, 44, 38, null, null] },
+  { acquired: "Abr", values: [52, 46, null, null, null] },
+  { acquired: "Mai", values: [55, null, null, null, null] },
+];
+
+// Clientes sem compra recente. intervaloMedio = dias entre compras no histórico do cliente.
+// O nível de risco é calculado em lib/indicators.ts.
+export const churnRisk = [
+  { cliente: "Roberto Lima", tipo: "PF", ultimaCompra: "12/03/2024", diasInativo: 98, intervaloMedio: 38, ticketMedio: 156, comprasTotal: 4 },
+  { cliente: "Ana Beatriz", tipo: "PF", ultimaCompra: "28/03/2024", diasInativo: 82, intervaloMedio: 38, ticketMedio: 89, comprasTotal: 3 },
+  { cliente: "Marcos Oliveira", tipo: "PF", ultimaCompra: "15/04/2024", diasInativo: 64, intervaloMedio: 30, ticketMedio: 210, comprasTotal: 6 },
+  { cliente: "Patrícia Costa", tipo: "PF", ultimaCompra: "02/05/2024", diasInativo: 47, intervaloMedio: 21, ticketMedio: 340, comprasTotal: 8 },
+  { cliente: "Restaurante Sabor & Arte", tipo: "B2B", ultimaCompra: "10/05/2024", diasInativo: 39, intervaloMedio: 8, ticketMedio: 890, comprasTotal: 12 },
+];
+
+// Fiados em aberto
 export type DebtorStatus = "atrasado" | "parcial" | "devendo" | "em dia";
 
 export const debtors: {
@@ -148,7 +279,7 @@ export const lowStock = [
 export type Severity = "critical" | "warning" | "info";
 
 export const manualAlerts: {
-  type: "stock" | "finance" | "operational";
+  type: "stock" | "finance" | "operational" | "churn" | "process";
   severity: Severity;
   message: string;
   icon: string;

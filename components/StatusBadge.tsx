@@ -1,6 +1,15 @@
 import { STATUS_COLORS } from "@/lib/chartTheme";
 
-export type BadgeStatus = "devendo" | "parcial" | "em dia" | "atrasado" | "ideal" | "atencao" | "baixo";
+export type BadgeStatus =
+  | "devendo"
+  | "parcial"
+  | "em dia"
+  | "atrasado"
+  | "ideal"
+  | "atencao"
+  | "baixo"
+  | "alto"
+  | "medio";
 
 const MAP: Record<BadgeStatus, { label: string; color: string }> = {
   "em dia": { label: "Em dia", color: STATUS_COLORS.ideal },
@@ -10,6 +19,8 @@ const MAP: Record<BadgeStatus, { label: string; color: string }> = {
   ideal: { label: "Ideal", color: STATUS_COLORS.ideal },
   atencao: { label: "Atenção", color: STATUS_COLORS.atencao },
   baixo: { label: "Baixo", color: STATUS_COLORS.baixo },
+  alto: { label: "Risco alto", color: STATUS_COLORS.critico },
+  medio: { label: "Risco médio", color: STATUS_COLORS.atencao },
 };
 
 /** Badge de status: sempre dot + texto (nunca cor sozinha). */

@@ -1,8 +1,30 @@
-import { AlertTriangle, Info, Package, PackageX, RotateCcw, Zap, type LucideIcon } from "lucide-react";
+import {
+  AlertTriangle,
+  Clock,
+  Info,
+  Mail,
+  Package,
+  PackageX,
+  RotateCcw,
+  UserMinus,
+  UserX,
+  Zap,
+  type LucideIcon,
+} from "lucide-react";
 import type { Alert } from "@/lib/indicators";
 import { STATUS_COLORS } from "@/lib/chartTheme";
 
-const ICONS: Record<string, LucideIcon> = { AlertTriangle, Package, PackageX, RotateCcw, Zap };
+const ICONS: Record<string, LucideIcon> = {
+  AlertTriangle,
+  Clock,
+  Mail,
+  Package,
+  PackageX,
+  RotateCcw,
+  UserMinus,
+  UserX,
+  Zap,
+};
 
 const SEVERITY = {
   critical: { label: "Crítico", color: STATUS_COLORS.critico },
