@@ -20,8 +20,6 @@ export const ADEGA = {
   subtitulo: "Mapeamento e Controle de Indicadores de Gestão",
   periodo: "Janeiro a Junho 2024",
   periodoCurto: "Jan–Jun 2024",
-  footer:
-    "Dashboard gerado automaticamente via Power Automate + Excel · Projeto de Extensão Universitário",
 } as const;
 
 // ── Metas e base de comparação ──

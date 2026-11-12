@@ -11,7 +11,6 @@ export default function Footer() {
           <span aria-hidden>·</span>
           <span>{ADEGA.periodo}</span>
         </div>
-        <p className="max-w-xl md:text-right">{ADEGA.footer}</p>
       </div>
     </footer>
   );
