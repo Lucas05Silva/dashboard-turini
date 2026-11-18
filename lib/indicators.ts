@@ -99,7 +99,7 @@ export function getKpis(): Kpi[] {
       id: "faturamento",
       label: "Faturamento Bruto",
       value: brl(totalFaturamento),
-      delta: `${cresc >= 0 ? "+" : "−"}${num(Math.abs(cresc))}% vs semestre anterior`,
+      delta: `${cresc >= 0 ? "+" : "−"}${num(Math.abs(cresc))}% vs Jan–Out 2025`,
       tone: cresc >= 0 ? "positive" : "negative",
       icon: "DollarSign",
     },
@@ -431,7 +431,7 @@ export function retencaoAntesDepois() {
   };
 }
 
-/** Receita do semestre associada a 1 p.p. de retenção (1% da base ativa × receita média por cliente) */
+/** Receita do período associada a 1 p.p. de retenção (1% da base ativa × receita média por cliente) */
 export function valorPontoRetencao() {
   const receitaPorCliente = totalFaturamento / totalClientesAtivos;
   return totalClientesAtivos * 0.01 * receitaPorCliente;

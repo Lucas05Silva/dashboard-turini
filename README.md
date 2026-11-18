@@ -56,7 +56,7 @@ O nível de risco de churn é calculado (inativo há `churnDiasAlto`+ dias **ou*
 mês da automação; o de pós-venda (`retencao: true`) é usado para comparar a retenção antes ×
 depois e aparece como linha de referência no gráfico de retenção.
 
-Metas (margem, giro, prazo máximo de fiado, dias de inatividade) e a base de comparação com o semestre anterior
+Metas (margem, giro, prazo máximo de fiado, dias de inatividade) e a base de comparação com o mesmo período do ano anterior
 também ficam em `lib/data.ts` (`metas`, `periodoAnterior`). Alertas de estoque são gerados a
 partir de `lowStock`; pendências avulsas vão em `manualAlerts`.
 

@@ -18,18 +18,18 @@
 export const ADEGA = {
   nome: "Turini Adega & Empórios",
   subtitulo: "Mapeamento e Controle de Indicadores de Gestão",
-  periodo: "Janeiro a Junho 2026",
-  periodoCurto: "Jan–Jun 2026",
+  periodo: "Janeiro a Outubro 2026",
+  periodoCurto: "Jan–Out 2026",
 } as const;
 
 // ── Metas e base de comparação ──
 export const metas = {
   margemBruta: 50, // %
-  giroEstoque: 6, // vezes no período
+  giroEstoque: 6, // vezes no período (Jan–Out)
   fiadoDiasMax: 60, // fiados acima disso devem ser zerados
   diasInativo: 60, // cliente sem compra há mais que isso = inativo
   // Premissa da estimativa de reativação: quantas compras (ao ticket médio)
-  // um cliente de compra única reativado faz no semestre.
+  // um cliente de compra única reativado faz no período.
   comprasPorClienteReativado: 3,
   // Risco de churn ALTO quando: inativo há X+ dias, OU parado há N× o próprio intervalo médio
   churnDiasAlto: 75,
@@ -38,31 +38,31 @@ export const metas = {
 } as const;
 
 export const periodoAnterior = {
-  faturamento: 116951,
+  faturamento: 211697, // Jan–Out 2025
   ticketMedio: 75.5,
 } as const;
 
 // ── ATO 2: Composição de Receita ──
 export const salesMix = [
-  { category: "Vinhos Tintos", revenue: 48312, transactions: 486 },
-  { category: "Destilados", revenue: 27110, transactions: 198 },
-  { category: "Espumantes", revenue: 18548, transactions: 215 },
-  { category: "Cervejas", revenue: 14268, transactions: 412 },
-  { category: "Massas Importadas", revenue: 11414, transactions: 178 },
-  { category: "Conservas e Azeites", revenue: 10701, transactions: 98 },
-  { category: "Vinhos Brancos/Rosé", revenue: 7134, transactions: 89 },
-  { category: "Frios e Doces Import.", revenue: 5193, transactions: 55 },
+  { category: "Vinhos Tintos", revenue: 87451, transactions: 880 },
+  { category: "Destilados", revenue: 49073, transactions: 358 },
+  { category: "Espumantes", revenue: 33574, transactions: 389 },
+  { category: "Cervejas", revenue: 25827, transactions: 746 },
+  { category: "Massas Importadas", revenue: 20661, transactions: 322 },
+  { category: "Conservas e Azeites", revenue: 19370, transactions: 177 },
+  { category: "Vinhos Brancos/Rosé", revenue: 12914, transactions: 161 },
+  { category: "Frios e Doces Import.", revenue: 9400, transactions: 100 },
 ];
 
 export const topProducts = [
-  { name: "Casillero del Diablo Cab Sauv", revenue: 12475, units: 250 },
-  { name: "Whisky Jack Daniels 1L", revenue: 11394, units: 60 },
-  { name: "Heineken Long Neck (cx 24)", revenue: 9360, units: 52 },
-  { name: "Espumante Chandon Brut", revenue: 8991, units: 100 },
-  { name: "Gin Tanqueray 750ml", revenue: 7194, units: 60 },
-  { name: "Massa Penne De Cecco 500g", revenue: 5725, units: 250 },
-  { name: "Azeite Gallo 500ml", revenue: 5148, units: 120 },
-  { name: "Atum Rio Mare 160g", revenue: 4935, units: 150 },
+  { name: "Casillero del Diablo Cab Sauv", revenue: 22581, units: 453 },
+  { name: "Whisky Jack Daniels 1L", revenue: 20625, units: 109 },
+  { name: "Heineken Long Neck (cx 24)", revenue: 16943, units: 94 },
+  { name: "Espumante Chandon Brut", revenue: 16275, units: 181 },
+  { name: "Gin Tanqueray 750ml", revenue: 13022, units: 109 },
+  { name: "Massa Penne De Cecco 500g", revenue: 10363, units: 453 },
+  { name: "Azeite Gallo 500ml", revenue: 9319, units: 217 },
+  { name: "Atum Rio Mare 160g", revenue: 8933, units: 272 },
 ];
 
 export const paymentMethods = [
@@ -72,6 +72,10 @@ export const paymentMethods = [
   { month: "Abr", pix: 11200, credito: 6800, debito: 4100, dinheiro: 1700, fiado: 410 },
   { month: "Mai", pix: 11800, credito: 7100, debito: 4600, dinheiro: 1500, fiado: 320 },
   { month: "Jun", pix: 13330, credito: 7400, debito: 4800, dinheiro: 1400, fiado: 280 },
+  { month: "Jul", pix: 13800, credito: 7600, debito: 4900, dinheiro: 1300, fiado: 200 },
+  { month: "Ago", pix: 14300, credito: 7800, debito: 4900, dinheiro: 1250, fiado: 200 },
+  { month: "Set", pix: 14900, credito: 7900, debito: 5000, dinheiro: 1150, fiado: 150 },
+  { month: "Out", pix: 15700, credito: 8100, debito: 5150, dinheiro: 1140, fiado: 150 },
 ];
 
 // Perfil de clientes ativos por tipo (percentReceita deve somar 100)
@@ -90,22 +94,26 @@ export const monthlyFinancials = [
   { month: "Abr", faturamento: 24210, cmv: 13316, despesasFixas: 8420 },
   { month: "Mai", faturamento: 25320, cmv: 13926, despesasFixas: 8420 },
   { month: "Jun", faturamento: 27210, cmv: 14966, despesasFixas: 8420 },
+  { month: "Jul", faturamento: 27800, cmv: 15290, despesasFixas: 8420 },
+  { month: "Ago", faturamento: 28450, cmv: 15648, despesasFixas: 8420 },
+  { month: "Set", faturamento: 29100, cmv: 16005, despesasFixas: 8420 },
+  { month: "Out", faturamento: 30240, cmv: 16632, despesasFixas: 8420 },
 ];
 
-// Despesas operacionais do semestre (o CMV é somado automaticamente a partir
+// Despesas operacionais do período (o CMV é somado automaticamente a partir
 // de monthlyFinancials para compor a estrutura de custos completa).
 export const fixedExpenses = [
-  { name: "Aluguel", value: 19200 },
-  { name: "Salários + Encargos", value: 16800 },
-  { name: "Contador + Impostos", value: 6000 },
-  { name: "Contas (luz, água, internet)", value: 3840 },
-  { name: "Frete Importação", value: 2280 },
-  { name: "Embalagens + Materiais", value: 1320 },
-  { name: "Manutenção + Outros", value: 1080 },
+  { name: "Aluguel", value: 32000 },
+  { name: "Salários + Encargos", value: 28000 },
+  { name: "Contador + Impostos", value: 10000 },
+  { name: "Contas (luz, água, internet)", value: 6400 },
+  { name: "Frete Importação", value: 3800 },
+  { name: "Embalagens + Materiais", value: 2200 },
+  { name: "Manutenção + Outros", value: 1800 },
 ];
 
 // ── ATO 4: Eficiência Operacional ──
-// Giro = vezes que o estoque da categoria "se renovou" no semestre.
+// Giro = vezes que o estoque da categoria "se renovou" no período.
 // O status (ideal / atenção / baixo) é derivado da meta em lib/indicators.ts.
 export const stockTurnover = [
   { category: "Cervejas", turnover: 8.2 },
@@ -137,13 +145,13 @@ export const marginByProduct = [
 
 // ── ATO 5: Jornada do Cliente + Processos ──
 
-// Funil da jornada (semestre). A 1ª etapa é a base; as demais são subconjuntos.
+// Funil da jornada (período). A 1ª etapa é a base; as demais são subconjuntos.
 export const customerJourney = [
-  { stage: "Visitaram a loja", count: 320 },
-  { stage: "Fizeram 1ª compra", count: 210 },
-  { stage: "Voltaram (2ª compra)", count: 148 },
-  { stage: "Compraram 3+ vezes", count: 89 },
-  { stage: "Clientes fiéis (mensal)", count: 52 },
+  { stage: "Visitaram a loja", count: 540 },
+  { stage: "Fizeram 1ª compra", count: 350 },
+  { stage: "Voltaram (2ª compra)", count: 246 },
+  { stage: "Compraram 3+ vezes", count: 150 },
+  { stage: "Clientes fiéis (mensal)", count: 88 },
 ];
 
 // Clientes distintos que compraram em cada mês: novos (1ª compra) vs recorrentes
@@ -154,15 +162,19 @@ export const newVsReturning = [
   { month: "Abr", novos: 30, recorrentes: 48 },
   { month: "Mai", novos: 33, recorrentes: 50 },
   { month: "Jun", novos: 32, recorrentes: 56 },
+  { month: "Jul", novos: 36, recorrentes: 60 },
+  { month: "Ago", novos: 34, recorrentes: 63 },
+  { month: "Set", novos: 36, recorrentes: 66 },
+  { month: "Out", novos: 34, recorrentes: 70 },
 ];
 
-// Quantas vezes cada cliente comprou no semestre (soma = clientes da 1ª compra)
+// Quantas vezes cada cliente comprou no período (soma = clientes da 1ª compra)
 export const purchaseFrequency = [
-  { frequency: "1 compra", count: 62, single: true },
-  { frequency: "2–3 compras", count: 59 },
-  { frequency: "4–6 compras", count: 48 },
-  { frequency: "7–12 compras", count: 29 },
-  { frequency: "13+ (semanal)", count: 12 },
+  { frequency: "1 compra", count: 104, single: true },
+  { frequency: "2–3 compras", count: 96 },
+  { frequency: "4–6 compras", count: 78 },
+  { frequency: "7–12 compras", count: 48 },
+  { frequency: "13+ (semanal)", count: 24 },
 ];
 
 // Intervalo médio entre compras por perfil (dias). ideal: null = sazonal, sem meta.
@@ -225,25 +237,33 @@ export const retentionRate = [
   { month: "Abr", rate: 55 },
   { month: "Mai", rate: 54 },
   { month: "Jun", rate: 58 },
+  { month: "Jul", rate: 59 },
+  { month: "Ago", rate: 61 },
+  { month: "Set", rate: 60 },
+  { month: "Out", rate: 63 },
 ];
 
 // Coorte: % dos clientes adquiridos no mês que voltaram em m+1, m+2...
 export const cohortData: { acquired: string; values: (number | null)[] }[] = [
-  { acquired: "Jan", values: [47, 38, 31, 26, 24] },
-  { acquired: "Fev", values: [50, 42, 35, 29, null] },
-  { acquired: "Mar", values: [54, 44, 38, null, null] },
-  { acquired: "Abr", values: [52, 46, null, null, null] },
-  { acquired: "Mai", values: [55, null, null, null, null] },
+  { acquired: "Jan", values: [47, 38, 31, 26, 24, 23, 22, 21, 21] },
+  { acquired: "Fev", values: [50, 42, 35, 29, 27, 26, 25, 24, null] },
+  { acquired: "Mar", values: [54, 44, 38, 33, 30, 29, 28, null, null] },
+  { acquired: "Abr", values: [52, 46, 39, 34, 31, 30, null, null, null] },
+  { acquired: "Mai", values: [55, 47, 40, 35, 33, null, null, null, null] },
+  { acquired: "Jun", values: [56, 48, 41, 36, null, null, null, null, null] },
+  { acquired: "Jul", values: [58, 49, 42, null, null, null, null, null, null] },
+  { acquired: "Ago", values: [57, 50, null, null, null, null, null, null, null] },
+  { acquired: "Set", values: [59, null, null, null, null, null, null, null, null] },
 ];
 
 // Clientes sem compra recente. intervaloMedio = dias entre compras no histórico do cliente.
 // O nível de risco é calculado em lib/indicators.ts.
 export const churnRisk = [
-  { cliente: "Roberto Lima", tipo: "PF", ultimaCompra: "12/03/2026", diasInativo: 98, intervaloMedio: 38, ticketMedio: 156, comprasTotal: 4 },
-  { cliente: "Ana Beatriz", tipo: "PF", ultimaCompra: "28/03/2026", diasInativo: 82, intervaloMedio: 38, ticketMedio: 89, comprasTotal: 3 },
-  { cliente: "Marcos Oliveira", tipo: "PF", ultimaCompra: "15/04/2026", diasInativo: 64, intervaloMedio: 30, ticketMedio: 210, comprasTotal: 6 },
-  { cliente: "Patrícia Costa", tipo: "PF", ultimaCompra: "02/05/2026", diasInativo: 47, intervaloMedio: 21, ticketMedio: 340, comprasTotal: 8 },
-  { cliente: "Restaurante Sabor & Arte", tipo: "B2B", ultimaCompra: "10/05/2026", diasInativo: 39, intervaloMedio: 8, ticketMedio: 890, comprasTotal: 12 },
+  { cliente: "Roberto Lima", tipo: "PF", ultimaCompra: "25/07/2026", diasInativo: 98, intervaloMedio: 38, ticketMedio: 156, comprasTotal: 4 },
+  { cliente: "Ana Beatriz", tipo: "PF", ultimaCompra: "10/08/2026", diasInativo: 82, intervaloMedio: 38, ticketMedio: 89, comprasTotal: 3 },
+  { cliente: "Marcos Oliveira", tipo: "PF", ultimaCompra: "28/08/2026", diasInativo: 64, intervaloMedio: 30, ticketMedio: 210, comprasTotal: 6 },
+  { cliente: "Patrícia Costa", tipo: "PF", ultimaCompra: "14/09/2026", diasInativo: 47, intervaloMedio: 21, ticketMedio: 340, comprasTotal: 8 },
+  { cliente: "Restaurante Sabor & Arte", tipo: "B2B", ultimaCompra: "22/09/2026", diasInativo: 39, intervaloMedio: 8, ticketMedio: 890, comprasTotal: 12 },
 ];
 
 // Fiados em aberto
@@ -258,12 +278,12 @@ export const debtors: {
   diasAtraso: number;
 }[] = [
   { cliente: "Restaurante Bella", itens: "Massas + azeites + atum", valor: 890, vencimento: "Mensal", status: "atrasado", diasAtraso: 15 },
-  { cliente: "Carlos (bar esquina)", itens: "Cx Heineken + destilados", valor: 480, vencimento: "Março", status: "parcial", diasAtraso: 90 },
-  { cliente: "Sr. Antônio", itens: "3 garrafas vinho + whisky", valor: 299, vencimento: "Janeiro", status: "devendo", diasAtraso: 150 },
-  { cliente: "Pedro Eventos", itens: "12 vinhos p/ casamento", valor: 599, vencimento: "Abril", status: "devendo", diasAtraso: 60 },
-  { cliente: "Dona Márcia", itens: "2 Chandon + queijo brie", valor: 220, vencimento: "Fevereiro", status: "parcial", diasAtraso: 120 },
-  { cliente: "João (vizinho)", itens: "1 Jack Daniels", valor: 190, vencimento: "Maio", status: "devendo", diasAtraso: 30 },
-  { cliente: "Fernanda", itens: "Vinhos rosé + espumante", valor: 187, vencimento: "Junho", status: "devendo", diasAtraso: 5 },
+  { cliente: "Carlos (bar esquina)", itens: "Cx Heineken + destilados", valor: 480, vencimento: "Agosto", status: "parcial", diasAtraso: 90 },
+  { cliente: "Sr. Antônio", itens: "3 garrafas vinho + whisky", valor: 299, vencimento: "Junho", status: "devendo", diasAtraso: 150 },
+  { cliente: "Pedro Eventos", itens: "12 vinhos p/ casamento", valor: 599, vencimento: "Setembro", status: "devendo", diasAtraso: 60 },
+  { cliente: "Dona Márcia", itens: "2 Chandon + queijo brie", valor: 220, vencimento: "Julho", status: "parcial", diasAtraso: 120 },
+  { cliente: "João (vizinho)", itens: "1 Jack Daniels", valor: 190, vencimento: "Outubro", status: "devendo", diasAtraso: 30 },
+  { cliente: "Fernanda", itens: "Vinhos rosé + espumante", valor: 187, vencimento: "Outubro", status: "devendo", diasAtraso: 5 },
 ];
 
 // Itens com estoque abaixo do mínimo — viram alertas automaticamente.
@@ -282,5 +302,5 @@ export const manualAlerts: {
   message: string;
   icon: string;
 }[] = [
-  { type: "finance", severity: "warning", message: "Conta de luz de Maio: pagamento pendente", icon: "Zap" },
+  { type: "finance", severity: "warning", message: "Conta de luz de Outubro: pagamento pendente", icon: "Zap" },
 ];

@@ -46,7 +46,7 @@ export default function StockTurnoverChart() {
             axisLine={axisProps.axisLine}
             tickLine={false}
           />
-          <Tooltip {...tooltipProps} formatter={(value) => [times(value as number), "Giro no semestre"]} />
+          <Tooltip {...tooltipProps} formatter={(value) => [times(value as number), "Giro no período"]} />
           <ReferenceLine
             x={metas.giroEstoque}
             stroke={UI_COLORS.textMuted}

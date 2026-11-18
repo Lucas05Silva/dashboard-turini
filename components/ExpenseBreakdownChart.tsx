@@ -29,7 +29,7 @@ export default function ExpenseBreakdownChart() {
           {...tooltipProps}
           formatter={(value, _name, item) => [
             `${brlTooltip(value as number)} · ${pct(item.payload.percent)}`,
-            "Gasto no semestre",
+            "Gasto no período",
           ]}
         />
         <Bar isAnimationActive={!reduced} dataKey="value" barSize={20} radius={[0, 4, 4, 0]}>

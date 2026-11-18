@@ -155,14 +155,14 @@ export default function Home() {
         <StorySection
           act={1}
           question="Como está a saúde do negócio?"
-          title={`Visão Geral — Semestre ${ADEGA.periodoCurto}`}
+          title={`Visão Geral — ${ADEGA.periodoCurto}`}
           subtitle={`10 indicadores que resumem a saúde financeira, operacional e de relacionamento da ${ADEGA.nome}`}
         >
           <KpiRow />
           {gapMargem > 0 ? (
             <CalloutBox variant="warning">
               A margem bruta de {pct(margem)} está {num(gapMargem, 1)} p.p. abaixo da meta de {metas.margemBruta}%.
-              Cada ponto de margem vale cerca de {brl(totalFaturamento / 100)} no semestre — renegociar compras e
+              Cada ponto de margem vale cerca de {brl(totalFaturamento / 100)} no período — renegociar compras e
               reforçar o mix do empório são os caminhos mais rápidos.
             </CalloutBox>
           ) : (
@@ -182,7 +182,7 @@ export default function Home() {
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
             <ChartCard
               title="Vinhos dominam, mas o empório cresce — composição por categoria"
-              subtitle={`3 categorias (${listaPt(mix.slice(0, 3).map((c) => c.category))}) respondem por ${pct(top3, 0)} do faturamento bruto do semestre`}
+              subtitle={`3 categorias (${listaPt(mix.slice(0, 3).map((c) => c.category))}) respondem por ${pct(top3, 0)} do faturamento bruto do período`}
             >
               <SalesMixChart />
             </ChartCard>
@@ -211,7 +211,7 @@ export default function Home() {
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
             <CalloutBox variant="insight">
               O PIX já responde por {pct(sharePix, 0)} do faturamento e segue em alta ({signedPct(varPix)} no
-              semestre) — dinheiro que cai na conta na hora, sem taxa de maquininha.
+              período) — dinheiro que cai na conta na hora, sem taxa de maquininha.
             </CalloutBox>
             <CalloutBox variant="action">
               Criar uma condição comercial para {b2b.b2b.type.toLowerCase()} (tabela de preço, entrega programada,
@@ -231,7 +231,7 @@ export default function Home() {
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
             <ChartCard
               title={`Para onde vai cada real: CMV é ${pct(cmv.percent, 0)}, ${listaPt(fixasTop.map((d) => d.name.toLowerCase()))} são os maiores fixos`}
-              subtitle="Estrutura completa de custos do semestre, incluindo a compra de mercadoria"
+              subtitle="Estrutura completa de custos do período, incluindo a compra de mercadoria"
             >
               <ExpenseBreakdownChart />
             </ChartCard>
@@ -243,7 +243,7 @@ export default function Home() {
             </ChartCard>
             <ChartCard
               title={`Saldo ${positivos === mensal.length ? "positivo em todos os meses" : `positivo em ${positivos} de ${mensal.length} meses`} — ${brlCompact(acumulado)} ao final de ${ultimoMes}`}
-              subtitle="Barras: saldo de cada mês · Área: saldo acumulado no semestre"
+              subtitle="Barras: saldo de cada mês · Área: saldo acumulado no período"
             >
               <MonthlyTrendChart />
             </ChartCard>
@@ -272,7 +272,7 @@ export default function Home() {
           act={4}
           question="O estoque atende a demanda?"
           title={`Capital parado em ${listaPt(giroCritico.map((c) => c.category.toLowerCase())) || "nenhuma categoria"}`}
-          subtitle="Giro mostra quantas vezes o estoque se renovou no semestre. O ideal é girar rápido — sem deixar faltar o que mais vende."
+          subtitle="Giro mostra quantas vezes o estoque se renovou no período. O ideal é girar rápido — sem deixar faltar o que mais vende."
         >
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1.4fr_1fr]">
             <ChartCard
@@ -350,7 +350,7 @@ export default function Home() {
           <CalloutBox variant="warning">
             O grupo de compra única ({num(unica.count)} clientes) é o maior alvo de reativação. Recuperar{" "}
             {reativ.pctAlvo}% dele ({num(reativ.clientes)} clientes) com {metas.comprasPorClienteReativado} compras
-            cada ao ticket médio representa cerca de {brl(reativ.valor)} a mais por semestre.
+            cada ao ticket médio representa cerca de {brl(reativ.valor)} a mais no período.
           </CalloutBox>
 
           <div className="pt-4">
@@ -382,7 +382,7 @@ export default function Home() {
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
             <ChartCard
               title={`${ret.variacao >= 0 ? "Tendência positiva" : "Tendência de queda"}: ${ret.variacao >= 0 ? "+" : "−"}${Math.abs(ret.variacao)} p.p. de retenção entre ${ret.primeiroMes} e ${ret.ultimoMes}`}
-              subtitle={`Cada ponto percentual de retenção equivale a ~${brlCompact(valorPontoRetencao())}/semestre em receita preservada`}
+              subtitle={`Cada ponto percentual de retenção equivale a ~${brlCompact(valorPontoRetencao())} no período em receita preservada`}
             >
               <RetentionRateChart />
             </ChartCard>

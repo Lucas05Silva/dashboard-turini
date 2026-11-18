@@ -15,7 +15,7 @@ export default function CohortTable() {
 
   return (
     <div className="-mx-5 overflow-x-auto px-5 sm:mx-0 sm:px-0">
-      <table className="w-full min-w-[300px] border-separate border-spacing-[3px] text-sm tabular-nums">
+      <table className="w-full min-w-[460px] border-separate border-spacing-[3px] text-sm tabular-nums">
         <caption className="sr-only">
           Coorte: percentual de clientes adquiridos em cada mês que voltaram a comprar nos meses seguintes
         </caption>
