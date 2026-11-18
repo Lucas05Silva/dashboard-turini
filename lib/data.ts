@@ -18,8 +18,8 @@
 export const ADEGA = {
   nome: "Turini Adega & Empórios",
   subtitulo: "Mapeamento e Controle de Indicadores de Gestão",
-  periodo: "Janeiro a Junho 2024",
-  periodoCurto: "Jan–Jun 2024",
+  periodo: "Janeiro a Junho 2026",
+  periodoCurto: "Jan–Jun 2026",
 } as const;
 
 // ── Metas e base de comparação ──
@@ -239,11 +239,11 @@ export const cohortData: { acquired: string; values: (number | null)[] }[] = [
 // Clientes sem compra recente. intervaloMedio = dias entre compras no histórico do cliente.
 // O nível de risco é calculado em lib/indicators.ts.
 export const churnRisk = [
-  { cliente: "Roberto Lima", tipo: "PF", ultimaCompra: "12/03/2024", diasInativo: 98, intervaloMedio: 38, ticketMedio: 156, comprasTotal: 4 },
-  { cliente: "Ana Beatriz", tipo: "PF", ultimaCompra: "28/03/2024", diasInativo: 82, intervaloMedio: 38, ticketMedio: 89, comprasTotal: 3 },
-  { cliente: "Marcos Oliveira", tipo: "PF", ultimaCompra: "15/04/2024", diasInativo: 64, intervaloMedio: 30, ticketMedio: 210, comprasTotal: 6 },
-  { cliente: "Patrícia Costa", tipo: "PF", ultimaCompra: "02/05/2024", diasInativo: 47, intervaloMedio: 21, ticketMedio: 340, comprasTotal: 8 },
-  { cliente: "Restaurante Sabor & Arte", tipo: "B2B", ultimaCompra: "10/05/2024", diasInativo: 39, intervaloMedio: 8, ticketMedio: 890, comprasTotal: 12 },
+  { cliente: "Roberto Lima", tipo: "PF", ultimaCompra: "12/03/2026", diasInativo: 98, intervaloMedio: 38, ticketMedio: 156, comprasTotal: 4 },
+  { cliente: "Ana Beatriz", tipo: "PF", ultimaCompra: "28/03/2026", diasInativo: 82, intervaloMedio: 38, ticketMedio: 89, comprasTotal: 3 },
+  { cliente: "Marcos Oliveira", tipo: "PF", ultimaCompra: "15/04/2026", diasInativo: 64, intervaloMedio: 30, ticketMedio: 210, comprasTotal: 6 },
+  { cliente: "Patrícia Costa", tipo: "PF", ultimaCompra: "02/05/2026", diasInativo: 47, intervaloMedio: 21, ticketMedio: 340, comprasTotal: 8 },
+  { cliente: "Restaurante Sabor & Arte", tipo: "B2B", ultimaCompra: "10/05/2026", diasInativo: 39, intervaloMedio: 8, ticketMedio: 890, comprasTotal: 12 },
 ];
 
 // Fiados em aberto
